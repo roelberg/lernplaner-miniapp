@@ -1,0 +1,202 @@
+:root {
+  color-scheme: light;
+  font-family: 'Segoe UI', sans-serif;
+  color: #252821;
+  background: #f6f5f1;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --muted: #777a70;
+  --green: #446b4d;
+  --line: #e7e6df;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(222, 229, 210, .52), transparent 34rem),
+    #f6f5f1;
+}
+
+button, input { font: inherit; }
+
+.app-shell {
+  width: min(100% - 40px, 800px);
+  margin: 0 auto;
+  padding: 66px 0 80px;
+}
+
+.page-header { margin-bottom: 34px; }
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .15em;
+}
+
+h1, h2, p { margin-top: 0; }
+h1, h2 { font-family: 'Segoe UI', sans-serif; }
+h1 {
+  margin-bottom: 8px;
+  font-size: clamp(34px, 6vw, 46px);
+  font-weight: 700;
+  letter-spacing: -.055em;
+  line-height: 1.1;
+}
+.intro { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+.panel {
+  border: 1px solid rgba(230, 229, 221, .9);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .88);
+  box-shadow: 0 10px 35px rgba(40, 42, 34, .045);
+}
+.form-panel { padding: 27px 30px 30px; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; }
+.section-heading .eyebrow { margin-bottom: 7px; }
+h2 { margin-bottom: 0; font-size: 21px; font-weight: 700; letter-spacing: -.035em; }
+.form-panel .section-heading { margin-bottom: 24px; }
+
+.field { min-width: 0; }
+.field > label, .field legend {
+  display: block;
+  margin-bottom: 8px;
+  color: #484b43;
+  font-size: 12px;
+  font-weight: 600;
+}
+input[type="text"], input[type="date"] {
+  width: 100%;
+  height: 44px;
+  padding: 0 13px;
+  border: 1px solid #e3e3dc;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #252821;
+  font-size: 13px;
+  transition: border-color .15s, box-shadow .15s;
+}
+input::placeholder { color: #a6a79f; }
+input[type="text"]:focus, input[type="date"]:focus {
+  border-color: #78927a;
+  box-shadow: 0 0 0 3px rgba(68, 107, 77, .11);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 17px; }
+.form-row-bottom { align-items: end; }
+fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.priority-options { display: flex; align-items: center; gap: 8px; }
+.priority-option { position: relative; cursor: pointer; }
+.priority-option input { position: absolute; opacity: 0; pointer-events: none; }
+.priority-option span {
+  display: flex;
+  min-height: 37px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 1px solid #e7e7e1;
+  border-radius: 7px;
+  color: #696b64;
+  font-size: 11px;
+  transition: .15s ease;
+}
+.priority-option input:checked + span { border-color: #b8c9b6; background: #f3f7f1; color: #385a3f; }
+.priority-option input:focus-visible + span { outline: 2px solid #446b4d; outline-offset: 2px; }
+.priority-dot { width: 7px; height: 7px; border-radius: 50%; background: #c68a65; }
+.priority-dot.normal { background: #a8a477; }
+.priority-dot.low { background: #80a18a; }
+.add-button {
+  display: inline-flex;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background .15s, transform .15s;
+}
+.add-button:hover { background: #35583e; }
+.add-button:active { transform: translateY(1px); }
+.add-button span { font-size: 18px; font-weight: 400; line-height: 1; }
+
+.task-section { margin-top: 39px; }
+.task-heading { margin-bottom: 16px; }
+.task-count { padding: 6px 10px; border-radius: 20px; background: #ebece5; color: #666a60; font-size: 11px; }
+.task-list { display: grid; gap: 10px; }
+.empty-state {
+  padding: 27px 20px;
+  border: 1px dashed #d8d9d0;
+  border-radius: 12px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+.task-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 17px 19px;
+  border: 1px solid #e7e6df;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .88);
+  box-shadow: 0 5px 17px rgba(40, 42, 34, .025);
+}
+.task-card.is-done .task-title { color: #898b83; text-decoration: line-through; }
+.task-main { min-width: 0; }
+.task-title { overflow-wrap: anywhere; margin: 0 0 7px; font-family: 'Segoe UI', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: -.02em; }
+.task-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 12px; color: var(--muted); font-size: 11px; }
+.task-subject { color: #55594f; font-weight: 500; }
+.task-priority { display: inline-flex; align-items: center; gap: 5px; }
+.task-actions { display: flex; align-items: center; gap: 10px; }
+.status-control { display: flex; align-items: center; gap: 7px; color: #686b63; font-size: 11px; }
+.status-control select {
+  height: 34px;
+  padding: 0 27px 0 9px;
+  border: 1px solid #e5e5de;
+  border-radius: 7px;
+  background: #fff;
+  color: #464a42;
+  cursor: pointer;
+  font: inherit;
+}
+.delete-button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #e8e7e1;
+  border-radius: 7px;
+  background: #fff;
+  color: #8b716a;
+  cursor: pointer;
+  font-size: 17px;
+  line-height: 1;
+}
+.delete-button:hover { border-color: #ddc5be; background: #fbf6f4; color: #a14e3b; }
+button:focus-visible, select:focus-visible { outline: 2px solid #446b4d; outline-offset: 2px; }
+
+@media (max-width: 600px) {
+  .app-shell { width: min(100% - 28px, 800px); padding-top: 42px; }
+  .form-panel { padding: 22px 19px; }
+  .form-row { grid-template-columns: 1fr; gap: 15px; }
+  .form-row-bottom { align-items: stretch; }
+  .add-button { width: 100%; }
+  .task-card { grid-template-columns: 1fr; gap: 13px; padding: 15px; }
+  .task-actions { justify-content: space-between; }
+}
+
+@media (max-width: 390px) {
+  .priority-options { gap: 5px; }
+  .priority-option span { gap: 5px; padding: 0 7px; font-size: 10px; }
+}
