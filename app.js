@@ -2,8 +2,10 @@ const STORAGE_KEY = 'lernplaner-tasks';
 const form = document.querySelector('#task-form');
 const taskList = document.querySelector('#task-list');
 const taskCount = document.querySelector('#task-count');
+const filterButtons = document.querySelectorAll('[data-filter]');
 
 let tasks = loadTasks();
+let activeFilter = 'alle';
 
 function loadTasks() {
   try {
@@ -100,17 +102,35 @@ function renderTasks() {
   taskList.replaceChildren();
   taskCount.textContent = `${tasks.length} ${tasks.length === 1 ? 'Aufgabe' : 'Aufgaben'}`;
 
-  if (tasks.length === 0) {
+  const visibleTasks = activeFilter === 'alle'
+    ? tasks
+    : tasks.filter((task) => task.status === activeFilter);
+
+  if (visibleTasks.length === 0) {
     const emptyState = document.createElement('p');
     emptyState.className = 'empty-state';
-    emptyState.textContent = 'Noch keine Aufgaben. Füge deine erste Lernaufgabe hinzu.';
+    emptyState.textContent = tasks.length === 0
+      ? 'Noch keine Aufgaben. Füge deine erste Lernaufgabe hinzu.'
+      : 'Keine Aufgaben für diesen Status.';
     taskList.append(emptyState);
     return;
   }
 
-  for (const task of tasks) {
+  for (const task of visibleTasks) {
     taskList.append(createTaskElement(task));
   }
+}
+
+for (const button of filterButtons) {
+  button.addEventListener('click', () => {
+    activeFilter = button.dataset.filter;
+    for (const filterButton of filterButtons) {
+      const isActive = filterButton === button;
+      filterButton.classList.toggle('is-active', isActive);
+      filterButton.setAttribute('aria-pressed', String(isActive));
+    }
+    renderTasks();
+  });
 }
 
 form.addEventListener('submit', (event) => {

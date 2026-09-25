@@ -132,6 +132,19 @@ fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
 .task-section { margin-top: 39px; }
 .task-heading { margin-bottom: 16px; }
 .task-count { padding: 6px 10px; border-radius: 20px; background: #ebece5; color: #666a60; font-size: 11px; }
+.task-filters { display: flex; gap: 6px; margin-bottom: 12px; }
+.filter-button {
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid #e3e3dc;
+  border-radius: 7px;
+  background: transparent;
+  color: #696b64;
+  cursor: pointer;
+  font-size: 11px;
+}
+.filter-button:hover { background: #fff; }
+.filter-button.is-active { border-color: #b8c9b6; background: #edf2eb; color: #385a3f; font-weight: 600; }
 .task-list { display: grid; gap: 10px; }
 .empty-state {
   padding: 27px 20px;
