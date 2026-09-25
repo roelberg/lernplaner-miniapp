@@ -24,10 +24,11 @@
           </div>
         </div>
 
-        <form id="task-form">
+        <form id="task-form" novalidate>
           <div class="field">
             <label for="title">Titel</label>
-            <input id="title" name="title" type="text" placeholder="z. B. Kapitel 4 wiederholen" required>
+            <input id="title" name="title" type="text" placeholder="z. B. Kapitel 4 wiederholen" aria-describedby="title-error" required>
+            <span id="title-error" class="field-error" role="alert" hidden>Bitte gib einen Titel für die Aufgabe ein.</span>
           </div>
 
           <div class="form-row">

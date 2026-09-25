@@ -1,11 +1,22 @@
 const STORAGE_KEY = 'lernplaner-tasks';
 const form = document.querySelector('#task-form');
+const titleInput = document.querySelector('#title');
+const titleError = document.querySelector('#title-error');
 const taskList = document.querySelector('#task-list');
 const taskCount = document.querySelector('#task-count');
 const filterButtons = document.querySelectorAll('[data-filter]');
 
 let tasks = loadTasks();
 let activeFilter = 'alle';
+
+function setTitleError(visible) {
+  titleError.hidden = !visible;
+  titleInput.setAttribute('aria-invalid', String(visible));
+}
+
+titleInput.addEventListener('input', () => {
+  if (titleInput.value.trim()) setTitleError(false);
+});
 
 function loadTasks() {
   try {
@@ -135,6 +146,12 @@ for (const button of filterButtons) {
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
+  if (!titleInput.value.trim()) {
+    setTitleError(true);
+    titleInput.focus();
+    return;
+  }
+  setTitleError(false);
   if (!form.reportValidity()) return;
 
   const formData = new FormData(form);
